@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script>
+        function remove(id){
+                    let elem = document.getElementById(id);
+                    elem.parentNode.removeChild(elem);
+                }
+    </script>
+</head>
+
+
+<body>
+<!-- list [(id, name, price, link)-->
+    {% for item in items_list %}
+    <div id="{{ item[0] }}">
+    <img src="{{ url_for('static', filename=item[3]) }}" height="75" width="75">
+    <form action="{{ url_for('order.create') }}" method="post">
+    <input type="text" name="{{ item[0] }}" value="Amount">
+    <button onclick="remove( {{ item[0] }} )">Remove</button>
+    <br>
+    <hr>
+    </div>
+        {% if loop.last %}
+            <input type="submit" value="Submit Order">
+            </form>
+        {% endif %}
+    {% endfor %}
+
+</body>
+
+
+</html>
